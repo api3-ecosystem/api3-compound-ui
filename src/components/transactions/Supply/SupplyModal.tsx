@@ -12,7 +12,7 @@ import { ModalWrapper } from "../FlowCommons/ModalWrapper";
 import { SupplyModalContent } from "./SupplyModalContent";
 import { useChainId } from "wagmi";
 import { useAppDataContext } from "src/hooks/app-data-provider/useAppDataProvider";
-import { populateChainConfigs, populateCompoundMarket } from "configuration";
+import { populateCompoundMarket } from "configuration";
 
 export const SupplyModal = () => {
   const { type, close, args } = useModalContext() as ModalContextType<{
@@ -33,8 +33,7 @@ export const SupplyModal = () => {
   }, [compoundState]);
 
   const compoundMarket = populateCompoundMarket();
-  const chainConfig = populateChainConfigs();
-  const isCompound = chainConfig.currentMarket === "compound" ? true : false;
+  const isCompound = true;
 
   const supplyModalTitle = isCompound
     ? args.underlyingAsset === compoundMarket.marketAsset

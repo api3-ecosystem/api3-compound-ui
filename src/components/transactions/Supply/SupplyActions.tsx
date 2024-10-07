@@ -22,7 +22,7 @@ import { TxActionsWrapper } from "../TxActionsWrapper";
 import { APPROVAL_GAS_LIMIT, checkRequiresApproval } from "../utils";
 import { queryClient } from "pages/_app";
 import { useEthersSigner } from "src/hooks/lib/ethers";
-import { populateChainConfigs, populateCompoundMarket } from "configuration";
+import { populateCompoundMarket } from "configuration";
 import {
   getApprovalTransactionData,
   getSupplyTransactionData,
@@ -102,10 +102,8 @@ export const SupplyActions = ({
   >();
 
   const signer = useEthersSigner();
-  const currChainConfig = populateChainConfigs();
   const compoundMarket = populateCompoundMarket();
-  const isCompound =
-    currChainConfig.currentMarket === "compound" ? true : false;
+  const isCompound = true;
 
   // callback to fetch approved amount and determine execution path on dependency updates
   const fetchApprovedAmount = useCallback(

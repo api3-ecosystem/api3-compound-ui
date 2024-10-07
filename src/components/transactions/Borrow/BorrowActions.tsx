@@ -23,7 +23,7 @@ import { QueryKeys } from "src/ui-config/queries";
 import { TxActionsWrapper } from "../TxActionsWrapper";
 import { APPROVE_DELEGATION_GAS_LIMIT, checkRequiresApproval } from "../utils";
 import { useWeb3Context } from "src/hooks/lib/hooks/useWeb3Context";
-import { populateChainConfigs, populateCompoundMarket } from "configuration";
+import { populateCompoundMarket } from "configuration";
 import { getWithdrawTransactionData } from "src/helpers/compoundHelpers";
 import { useEthersSigner } from "src/hooks/lib/ethers";
 
@@ -82,8 +82,6 @@ export const BorrowActions = ({
   >();
 
   const compoundMarket = populateCompoundMarket();
-  const compoundConfig = populateChainConfigs();
-  const isCompound = compoundConfig.currentMarket === "compound";
   const signer = useEthersSigner();
 
   const approval = async () => {
@@ -130,24 +128,12 @@ export const BorrowActions = ({
 
       let borrowTxData;
 
-      if (isCompound) {
-        borrowTxData = await getWithdrawTransactionData(
-          compoundMarket.comet,
-          poolAddress,
-          parseUnits(amountToBorrow, poolReserve.decimals).toString(),
-          signer,
-        );
-      } else {
-        borrowTxData = borrow({
-          amount: parseUnits(amountToBorrow, poolReserve.decimals).toString(),
-          reserve: poolAddress,
-          interestRateMode,
-          debtTokenAddress:
-            interestRateMode === InterestRate.Variable
-              ? poolReserve.variableDebtTokenAddress
-              : poolReserve.stableDebtTokenAddress,
-        });
-      }
+      borrowTxData = await getWithdrawTransactionData(
+        compoundMarket.comet,
+        poolAddress,
+        parseUnits(amountToBorrow, poolReserve.decimals).toString(),
+        signer,
+      );
 
       borrowTxData = await estimateGasLimit(borrowTxData);
 
@@ -251,7 +237,6 @@ export const BorrowActions = ({
     setGasLimit(borrowGasLimit.toString());
   }, [requiresApproval, approvalTxState, setGasLimit]);
 
-  // const modalTitle = isCompound ? "Withdraw" : "Borrow";
   const { compoundState } = useAppDataContext();
 
   const isBaseSupplied = useMemo(() => {
@@ -274,11 +259,10 @@ export const BorrowActions = ({
       : false;
   }, [compoundState]);
 
-  const modalTitle = isCompound
-    ? poolAddress === compoundMarket.marketAsset && !isBaseSupplied
+  const modalTitle =
+    poolAddress === compoundMarket.marketAsset && !isBaseSupplied
       ? "Borrow"
-      : "Withdraw"
-    : "Borrow";
+      : "Withdraw";
 
   return (
     <TxActionsWrapper
@@ -296,7 +280,7 @@ export const BorrowActions = ({
       }
       actionInProgressText={
         <div>
-          {isCompound ? "Tx Pending..." : "Borrowing"} {symbol}
+          {"Tx Pending..."} {symbol}
         </div>
       }
       handleApproval={() => approval()}

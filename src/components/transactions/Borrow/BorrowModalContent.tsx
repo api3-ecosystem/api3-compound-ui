@@ -34,7 +34,6 @@ import { BorrowActions } from "./BorrowActions";
 import { BorrowAmountWarning } from "./BorrowAmountWarning";
 import { ParameterChangewarning } from "./ParameterChangewarning";
 import { ERC20TokenType } from "src/hooks/lib/Web3Provider";
-import { populateChainConfigs } from "configuration";
 
 export enum ErrorType {
   STABLE_RATE_NOT_ENABLED,
@@ -125,8 +124,7 @@ export const BorrowModalContent = ({
   const [amount, setAmount] = useState("");
   const [riskCheckboxAccepted, setRiskCheckboxAccepted] = useState(false);
 
-  const compoundConfig = populateChainConfigs();
-  const isCompound = compoundConfig.currentMarket === "compound";
+  const isCompound = true;
 
   console.log("withdraw asset ", {
     poolReserve,

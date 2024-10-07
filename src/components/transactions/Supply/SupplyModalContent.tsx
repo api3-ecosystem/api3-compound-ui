@@ -32,7 +32,6 @@ import {
 import { getAssetCollateralType } from "../utils";
 import { SupplyActions } from "./SupplyActions";
 import { ERC20TokenType } from "src/hooks/lib/Web3Provider";
-import { populateChainConfigs } from "configuration";
 
 export enum ErrorType {
   CAP_REACHED,
@@ -56,8 +55,7 @@ export const SupplyModalContent = ({
   const minRemainingBaseTokenBalance = useRootStore(
     (state) => state.poolComputed.minRemainingBaseTokenBalance,
   );
-  const compoundMarket = populateChainConfigs();
-  const isCompound = compoundMarket.currentMarket === "compound";
+  const isCompound = true;
   const compSupplyAPY = useMemo(() => {
     return compoundState?.assetInfo?.supplyAPR;
   }, [compoundState]);

@@ -54,7 +54,7 @@ export const TxSuccessView = ({
   const theme = useTheme();
 
   const compoundConfig = populateChainConfigs();
-  const isCompound = compoundConfig.currentMarket === "compound";
+  const isCompound = true;
 
   return (
     <>

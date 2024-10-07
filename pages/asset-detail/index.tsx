@@ -203,7 +203,7 @@ export default function AssetDetail() {
     eModes,
   } = useAppDataContext();
 
-  const { currentAccount, loading: loadingWeb3Context } = useWeb3Context();
+  const { currentAccount } = useWeb3Context();
 
   const underlyingAsset = router.query.underlyingAsset as string;
 
@@ -216,7 +216,7 @@ export default function AssetDetail() {
   const [selectedAsset, setSelectedAsset] = useState<string>(reserve?.symbol);
 
   const { currentMarket, currentNetworkConfig } = useProtocolDataContext();
-  const { walletBalances, loading: loadingWalletBalance } = useWalletBalances();
+  const { walletBalances } = useWalletBalances();
 
   const [minRemainingBaseTokenBalance, displayGho] = useRootStore((store) => [
     store.poolComputed.minRemainingBaseTokenBalance,
@@ -299,8 +299,6 @@ export default function AssetDetail() {
       );
     }
   };
-
-  // const { market } = getMarketInfoById(currentMarket);
 
   return (
     <>

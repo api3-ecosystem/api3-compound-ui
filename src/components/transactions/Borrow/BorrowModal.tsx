@@ -34,7 +34,7 @@ export const BorrowModal = () => {
   };
   const chainConfig = populateChainConfigs();
   const compoundMarket = populateCompoundMarket();
-  const isCompound = chainConfig.currentMarket === "compound" ? true : false;
+  const isCompound = true;
 
   const isBaseSupplied = useMemo(() => {
     if (!compoundState?.assetInfo?.baseInfo?.suppliedFormatted) {

@@ -19,7 +19,6 @@ import { GENERAL } from "src/utils/mixPanelEvents";
 import { TxModalTitle } from "../FlowCommons/TxModalTitle";
 import { ChangeNetworkWarning } from "../Warnings/ChangeNetworkWarning";
 import { TxErrorView } from "./Error";
-import { populateChainConfigs } from "configuration";
 
 export interface ModalWrapperProps {
   underlyingAsset: string;
@@ -209,8 +208,7 @@ export const ModalWrapper: React.FC<{
     isWrappedBaseAsset: false,
   };
 
-  const compoundMarket = populateChainConfigs();
-  const isCompound = compoundMarket.currentMarket === "compound";
+  const isCompound = true;
 
   const _poolReserve: any = useMemo(() => {
     return isCompound ? defaultPoolReserveForCompound : poolReserve;

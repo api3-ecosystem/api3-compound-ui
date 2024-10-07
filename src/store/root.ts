@@ -89,48 +89,22 @@ if (typeof document !== "undefined") {
 }
 
 export const usePoolDataSubscription = createSingletonSubscriber(() => {
-  const config = populateChainConfigs();
-
-  if (config.currentMarket !== "aave") {
-    return new Promise((resolve) => resolve);
-  }
-
-  return useRootStore.getState().refreshPoolData();
+  return new Promise((resolve) => resolve);
 }, 60000);
 
 export const usePoolDataV3Subscription = createSingletonSubscriber(() => {
-  const config = populateChainConfigs();
-  if (config.currentMarket !== "aave") {
-    return new Promise((resolve) => resolve);
-  }
-
-  return useRootStore.getState().refreshPoolV3Data();
+  return new Promise((resolve) => resolve);
 }, 60000);
 
 export const useIncentiveDataSubscription = createSingletonSubscriber(() => {
-  const config = populateChainConfigs();
-  if (config.currentMarket !== "aave") {
-    return new Promise((resolve) => resolve);
-  }
-
-  return useRootStore.getState().refreshIncentiveData();
+  return new Promise((resolve) => resolve);
 }, 60000);
 
 export const useGhoDataSubscription = createSingletonSubscriber(() => {
-  const config = populateChainConfigs();
-  if (config.currentMarket !== "aave") {
-    return new Promise((resolve) => resolve);
-  }
-
-  return useRootStore.getState().refreshGhoData();
+  return new Promise((resolve) => resolve);
 }, 60000);
 
 export const useCompoundV3Subscription = createSingletonSubscriber(() => {
-  const config = populateChainConfigs();
-  if (config.currentMarket !== "compound") {
-    return new Promise((resolve) => resolve);
-  }
-
   //Todo: check if current market is compound then load comp data
   return useRootStore.getState().refreshCompoundData();
 }, 60000);

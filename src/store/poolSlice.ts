@@ -26,17 +26,7 @@ import {
   UserReserveDataHumanized,
   V3FaucetService,
 } from "contract-helpers";
-// import {
-//   LPBorrowParamsType,
-//   LPSetUsageAsCollateral,
-//   LPSwapBorrowRateMode,
-//   LPWithdrawParamsType,
-// } from "contract-helpers/dist/esm/lendingPool-contract/lendingPoolTypes";
-// import {
-//   LPSignERC20ApprovalType,
-//   LPSupplyParamsType,
-//   LPSupplyWithPermitType,
-// } from "contract-helpers/dist/esm/v3-pool-contract/lendingPoolTypes";
+
 import { SignatureLike } from "@ethersproject/bytes";
 import dayjs from "dayjs";
 import {
@@ -48,11 +38,7 @@ import {
 } from "ethers";
 import { splitSignature } from "ethers/lib/utils";
 import { produce } from "immer";
-// import { ClaimRewardsActionsProps } from "src/components/transactions/ClaimRewards/ClaimRewardsActions";
-// import { DebtSwitchActionProps } from "src/components/transactions/DebtSwitch/DebtSwitchActions";
-// import { CollateralRepayActionProps } from "src/components/transactions/Repay/CollateralRepayActions";
-// import { RepayActionProps } from "src/components/transactions/Repay/RepayActions";
-// import { SwapActionProps } from "src/components/transactions/Swap/SwapActions";
+
 import { Approval } from "src/helpers/useTransactionHandler";
 import { MarketDataType } from "src/ui-config/marketsConfig";
 import { minBaseTokenRemainingByNetwork, optimizedPath } from "src/utils/utils";
@@ -68,7 +54,7 @@ import {
   getTokenAprovalAmount,
   getWithdrawTransactionData,
 } from "src/helpers/compoundHelpers";
-import { populateChainConfigs, populateCompoundMarket } from "configuration";
+import { populateCompoundMarket } from "configuration";
 
 // TODO: what is the better name for this type?
 export type PoolReserve = {
@@ -377,10 +363,9 @@ export const createPoolSlice: StateCreator<
       const poolBundle = getCorrectPoolBundle();
       const user = get().account;
       const compoundMarket = populateCompoundMarket();
-      const chainConfig = populateChainConfigs();
+
       // check approval amount for compound
-      const isCompound =
-        chainConfig.currentMarket === "compound" ? true : false;
+      const isCompound = true;
       if (isCompound) {
         const allowance = await getTokenAprovalAmount(
           user,
