@@ -33,7 +33,6 @@ export async function getBorrowCapacity(
   infos: any[],
   provider: any,
 ) {
-  console.log("compound state test ", account);
   try {
     const _cometAbi = [
       "function numAssets() returns (uint8)",
